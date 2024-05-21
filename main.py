@@ -18,8 +18,10 @@ svetloe = -1001947538282
 @app.on_message(filters.chat([svetloe, ]) & filters.text)
 async def pizdez_vlad(client, message):
     _message = message.text.split()[0].lower().strip()
-    if "пиздец" in _message and len(message.text.split()) == 1:
+    if "пиздец" == _message and len(message.text.split()) == 1:
         await message.reply("Влад")
+    if "да" == _message and len(message.text.split()) == 1:
+        await message.reply("Пизда.")
 
 
 # @app.on_message(filters.text & filters.private)
