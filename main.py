@@ -22,6 +22,12 @@ async def pizdez_vlad(client, message):
         await message.reply("Влад")
     if "да" == _message and len(message.text.split()) == 1:
         await message.reply("Пизда.")
+    if "пизда" == _message and len(message.text.split()) == 1:
+        await message.reply("Пиздец")
+    if "влад" == _message and len(message.text.split()) == 1:
+        await message.reply("да")
+    if "блядство" == _message and len(message.text.split()) == 1:
+        await message.reply("Полностью поддерживаю!")
 
 
 # @app.on_message(filters.text & filters.private)
