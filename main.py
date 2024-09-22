@@ -48,13 +48,13 @@ async def pizdez_vlad(client, message):
 
         if "пиздец" in first_word and message_len == 1:
             await message.reply("Влад")
-        if "да" in last_word:
+        elif "да" in last_word:
             await message.reply("Пизда.")
-        if "нет" in last_word:
+        elif "нет" in last_word:
             await message.reply("Ты знаешь чей ответ.")
-        if "пизда" in first_word and message_len == 1:
+        elif "пизда" in first_word and message_len == 1:
             await message.reply("Пиздец")
-        if "влад" == first_word and message_len == 1:
+        elif "влад" == first_word and message_len == 1:
             await message.reply("да")
 
     if "блядство" in first_word and message_len == 1:
@@ -62,7 +62,7 @@ async def pizdez_vlad(client, message):
     if "вот такая есть" in message.text.lower().strip() and message_len == 3:
         await message.reply("Ахвахвххва, ебанько!")
     if "хочу анекдот" in message.text.lower().strip() and message_len == 2:
-        await message.reply(random.choices(andecdot_list))
+        await message.reply("".join(random.choices(andecdot_list)))
 
 
 @app.on_message(filters.command(["chat_list", ]) & filters.text & filters.private)

@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  bot:
+    build:
+      dockerfile: DockerFile
+      context: .
+    restart: unless-stopped
+    volumes:
+      - ./main.py:/app/main.py
+      - ./config.ini:/app/config.ini
+    env_file:
+      - .env
