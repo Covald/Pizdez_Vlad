@@ -56,7 +56,7 @@ async def get_chat(client: pyrogram.Client, message: pyrogram.types.Message):
 async def vova_answer(client: pyrogram.Client, message: pyrogram.types.Message):
     if random.randrange(0, 100, 1) > vova_proc_chance:
         return
-    await message.reply("Хр хр")
+    await message.reply("Хрю хрю")
 
 
 @app.on_message(filters.chat([svetloe, ]) & filters.text)
