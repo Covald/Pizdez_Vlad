@@ -27,6 +27,7 @@ def load_config():
     VOVA_PROC_CHANCE = int(config.get("vova_proc_chance", 0))
     ALL_PROC_CHANCE = int(config.get("all_proc_chance", 0))
 
+load_config()
 
 async def change_proc_chance(message: pyrogram.types.Message, param_name: str, param_value: str):
     global config
