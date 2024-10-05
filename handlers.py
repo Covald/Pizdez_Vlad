@@ -8,7 +8,6 @@ ME_CHAT = 926836636
 VOVA_PROC_CHANCE: int = 0
 ALL_PROC_CHANCE: int = 0
 
-
 svetloe = -1001947538282
 
 TEST_CHAT = -1002001629088
@@ -21,13 +20,20 @@ andecdot_list = ["https://www.youtube.com/watch?v=k5vSmYlvMb0&ab_channel=ATVPlus
                  "https://www.youtube.com/watch?v=uSUT2STC4LE&ab_channel=maXXas"
                  ]
 
+goida_files = {
+    "photo":"AgACAgIAAxkBAAIBCGcAAcIZatamckc0iHPz4q8llHjazwAC-NoxG_onCEgpxj0e-XIEtQAIAQADAgADbQAHHgQ",
+    "animation":"CgACAgIAAxkBAAIBDGcAAcLGExO74XlHqlId_FbxIWYjBgACH00AAvonCEg7m2jwHXQaBx4E"
+}
+
 def load_config():
     global VOVA_PROC_CHANCE
     global ALL_PROC_CHANCE
     VOVA_PROC_CHANCE = int(config.get("vova_proc_chance", 0))
     ALL_PROC_CHANCE = int(config.get("all_proc_chance", 0))
 
+
 load_config()
+
 
 async def change_proc_chance(message: pyrogram.types.Message, param_name: str, param_value: str):
     global config
@@ -70,15 +76,31 @@ async def get_chat(client: pyrogram.Client, message: pyrogram.types.Message):
     await client.send_message(926836636, f"{message.chat.username or message.chat.title} - {message.chat.id}")
 
 
-async def vova_answer(client: pyrogram.Client, message: pyrogram.types.Message):
-    if random.randrange(0, 100, 1) > VOVA_PROC_CHANCE:
-        return
-    await message.reply("Хрю хрю")
+async def process_message(client: pyrogram.Client, message: pyrogram.types.Message) -> list:
+    return_messages = []
+    replaced_symbols = [",", ".", "?", "!", ":", ";"]
 
+    _message = message.text.lower().strip()
+    for symbol in replaced_symbols:
+        _message = _message.replace(symbol, " ")
+    print(_message)
+    words = _message.split()
+    print(words)
+    print(message)
+    if random.random() <= VOVA_PROC_CHANCE / 100 and message.from_user.username == "torchcat":
+        await message.reply("Хрю-хрю")
 
-async def process_message(client: pyrogram.Client, message: pyrogram.types.Message):
+    if "наконец-то" in words or "наконец то" in words or "наконецто" in words:
+        await message.reply("Гойда!")
+        await message.reply_photo(goida_files["photo"])
+        await message.reply_animation(goida_files["animation"])
+
+    if "гойда" in words or "гойду" in words:
+        await message.reply_animation(goida_files["animation"])
+
     if random.randrange(0, 100, 1) > ALL_PROC_CHANCE:
         return
+
     message_len = len(message.text.split())
     first_word = message.text.split()[0].lower().strip().replace(".", "").replace(",", "")
     last_word = message.text.split()[-1].lower().strip().replace(".", "").replace(",", "")
