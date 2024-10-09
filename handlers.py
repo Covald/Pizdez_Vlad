@@ -21,9 +21,10 @@ andecdot_list = ["https://www.youtube.com/watch?v=k5vSmYlvMb0&ab_channel=ATVPlus
                  ]
 
 goida_files = {
-    "photo":"AgACAgIAAxkBAAIBCGcAAcIZatamckc0iHPz4q8llHjazwAC-NoxG_onCEgpxj0e-XIEtQAIAQADAgADbQAHHgQ",
-    "animation":"CgACAgIAAxkBAAIBDGcAAcLGExO74XlHqlId_FbxIWYjBgACH00AAvonCEg7m2jwHXQaBx4E"
+    "photo": "AgACAgIAAxkBAAIBCGcAAcIZatamckc0iHPz4q8llHjazwAC-NoxG_onCEgpxj0e-XIEtQAIAQADAgADbQAHHgQ",
+    "animation": "CgACAgIAAxkBAAIBDGcAAcLGExO74XlHqlId_FbxIWYjBgACH00AAvonCEg7m2jwHXQaBx4E"
 }
+
 
 def load_config():
     global VOVA_PROC_CHANCE
@@ -90,7 +91,7 @@ async def process_message(client: pyrogram.Client, message: pyrogram.types.Messa
     if random.random() <= VOVA_PROC_CHANCE / 100 and message.from_user.username == "torchcat":
         await message.reply("Хрю-хрю")
 
-    if "наконец-то" in words or "наконец то" in words or "наконецто" in words:
+    if ("наконец-то" in words or "наконец то" in words or "наконецто" in words) and len(words) == 1:
         await message.reply("Гойда!")
         await message.reply_photo(goida_files["photo"])
         await message.reply_animation(goida_files["animation"])
