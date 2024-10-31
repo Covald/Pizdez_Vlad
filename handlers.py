@@ -78,20 +78,21 @@ async def get_chat(client: pyrogram.Client, message: pyrogram.types.Message):
 
 
 async def process_message(client: pyrogram.Client, message: pyrogram.types.Message) -> list:
-    return_messages = []
+    print(f"Receive message from {message.chat.username or message.chat.title} - {message.text}")
     replaced_symbols = [",", ".", "?", "!", ":", ";"]
 
+    if not message.text:
+        return
+    
     _message = message.text.lower().strip()
     for symbol in replaced_symbols:
         _message = _message.replace(symbol, " ")
-    print(_message)
     words = _message.split()
-    print(words)
-    print(message)
-    if random.random() <= VOVA_PROC_CHANCE / 100 and message.from_user.username == "torchcat":
+    
+    if random.random() <= VOVA_PROC_CHANCE / 100 and message.from_user.username == "@torchCat":
         await message.reply("Хрю-хрю")
 
-    if ("наконец-то" in words or "наконец то" in words or "наконецто" in words) and len(words) == 1:
+    if (("наконец-то" in words or "наконец то" in words or "наконецто" in words) and len(words) == 1) or (("наконец" in words and "то" in words) and len(words) == 2):
         await message.reply("Гойда!")
         await message.reply_photo(goida_files["photo"])
         await message.reply_animation(goida_files["animation"])
@@ -99,7 +100,7 @@ async def process_message(client: pyrogram.Client, message: pyrogram.types.Messa
     if "гойда" in words or "гойду" in words:
         await message.reply_animation(goida_files["animation"])
 
-    if random.randrange(0, 100, 1) > ALL_PROC_CHANCE:
+    if random.random() <= ALL_PROC_CHANCE / 100:
         return
 
     message_len = len(message.text.split())
