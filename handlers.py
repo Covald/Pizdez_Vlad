@@ -89,7 +89,7 @@ async def process_message(client: pyrogram.Client, message: pyrogram.types.Messa
         _message = _message.replace(symbol, " ")
     words = _message.split()
     
-    if random.random() <= VOVA_PROC_CHANCE / 100 and message.from_user.username == "@torchCat":
+    if message.from_user and random.random() <= VOVA_PROC_CHANCE / 100 and message.from_user.username == "@torchCat":
         await message.reply("Хрю-хрю")
 
     if (("наконец-то" in words or "наконец то" in words or "наконецто" in words) and len(words) == 1) or (("наконец" in words and "то" in words) and len(words) == 2):
