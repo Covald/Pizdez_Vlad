@@ -100,7 +100,7 @@ async def process_message(client: pyrogram.Client, message: pyrogram.types.Messa
     if "гойда" in words or "гойду" in words:
         await message.reply_animation(goida_files["animation"])
 
-    if random.random() <= ALL_PROC_CHANCE / 100:
+    if random.random() >= ALL_PROC_CHANCE / 100:
         return
 
     message_len = len(message.text.split())

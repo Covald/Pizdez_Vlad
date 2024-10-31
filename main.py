@@ -33,7 +33,7 @@ app.add_handler(MessageHandler(handlers.change_proc_chance_vova, filters.command
 app.add_handler(MessageHandler(handlers.change_proc_chance_all, filters.command("all_proc_chance") & ME_PRIVATE_CHAT))
 # app.add_handler(MessageHandler(handlers.vova_answer, SVETLOE & VOVA_USER))
 
-app.add_handler(MessageHandler(handlers.process_message, ~filters.private & filters.chat(TEST_CHAT)))
+app.add_handler(MessageHandler(handlers.process_message, ~(filters.private | filters.chat(TEST_CHAT))))
 
 app.add_handler(MessageHandler(handlers.get_chat, filters.command("get_chat") & ME_USER_FILTER))
 app.run()
